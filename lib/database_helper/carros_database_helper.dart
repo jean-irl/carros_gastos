@@ -1,6 +1,6 @@
 import 'package:sqflite/sqflite.dart';
 //Funcion para WEB
-import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
+//import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
 late Database db;
 
@@ -9,8 +9,8 @@ late Database db;
 
 class DBCarro {
   Future<void> initializeDatabase() async {
-    var fabricaBaseDatos = databaseFactoryFfiWeb; //Funcion para WEB
-    //var fabricaBaseDatos = databaseFactory; //Funcion para Android
+    //var fabricaBaseDatos = databaseFactoryFfiWeb; //Funcion para WEB
+    var fabricaBaseDatos = databaseFactory; //Funcion para Android
     String rutaBaseDatos =
         '${await fabricaBaseDatos.getDatabasesPath()}/carrosDB.db';
 

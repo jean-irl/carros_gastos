@@ -130,15 +130,58 @@ class _MainAppState extends State<MainApp> {
   }
 }
 
-class ListaCarros extends StatelessWidget {
+class ListaCarros extends StatefulWidget {
   const ListaCarros({super.key});
+
+  @override
+  State<ListaCarros> createState() => _ListaCarrosState();
+}
+
+class _ListaCarrosState extends State<ListaCarros> {
+  TextEditingController barraBusqueda = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocBuilder<CarroBloc, CarroEstado>(
         builder: (context, state) {
           if (state is GetAllCarros) {
-            return _listaCarros(state.carros);
+            List<Map<String, dynamic>> carrosFiltrados = state.carros
+                .where((carro) => carro['apodo']!
+                    .toLowerCase()
+                    .contains(barraBusqueda.text.toLowerCase()))
+                .toList();
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: TextField(
+                    controller: barraBusqueda,
+                    decoration: InputDecoration(
+                      labelText: 'Buscar',
+                      prefixIcon: const Icon(Icons.search),
+                      border: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    onChanged: (value) {
+                      setState(() {});
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: _listaCarros(carrosFiltrados),
+                ),
+              ],
+            );
           } else if (state is ErrorGetAllCarros) {
             return Center(child: Text('Error: ${state.mensajeError}'));
           } else {
@@ -427,15 +470,58 @@ class _EditarCarroState extends State<EditarCarro> {
   }
 }
 
-class ListaCategorias extends StatelessWidget {
+class ListaCategorias extends StatefulWidget {
   const ListaCategorias({super.key});
+
+  @override
+  State<ListaCategorias> createState() => _ListaCategoriasState();
+}
+
+class _ListaCategoriasState extends State<ListaCategorias> {
+  TextEditingController barraBusqueda = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocBuilder<CategoriaBloc, CategoriaEstado>(
         builder: (context, state) {
           if (state is GetAllCategorias) {
-            return _listaCategorias(state.categorias);
+            List<Map<String, dynamic>> categoriasFiltradas = state.categorias
+                .where((categoria) => categoria['nombrecategoria']!
+                    .toLowerCase()
+                    .contains(barraBusqueda.text.toLowerCase()))
+                .toList();
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: TextField(
+                    controller: barraBusqueda,
+                    decoration: InputDecoration(
+                      labelText: 'Buscar',
+                      prefixIcon: const Icon(Icons.search),
+                      border: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    onChanged: (value) {
+                      setState(() {});
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: _listaCategorias(categoriasFiltradas),
+                ),
+              ],
+            );
           } else if (state is ErrorGetAllCategorias) {
             return Center(child: Text('Error: ${state.mensajeError}'));
           } else {
@@ -725,16 +811,68 @@ class _EditarCategoriaState extends State<EditarCategoria> {
   }
 }
 
-class ListaMovimientos extends StatelessWidget {
+class ListaMovimientos extends StatefulWidget {
   const ListaMovimientos({super.key});
 
+  @override
+  State<ListaMovimientos> createState() => _ListaMovimientosState();
+}
+
+class _ListaMovimientosState extends State<ListaMovimientos> {
+  TextEditingController barraBusqueda = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocBuilder<MovimientoBloc, MovimientoEstado>(
         builder: (context, state) {
           if (state is GetAllMovimientos) {
-            return _listaMovientos(state.movimientos);
+            List<Map<String, dynamic>> movimientosFiltrados = state.movimientos
+                .where((movimiento) =>
+                    movimiento['nombremovimiento']!
+                        .toLowerCase()
+                        .contains(barraBusqueda.text.toLowerCase()) ||
+                    movimiento['apodo']!
+                        .toLowerCase()
+                        .contains(barraBusqueda.text.toLowerCase()) ||
+                    movimiento['nombrecategoria']!
+                        .toLowerCase()
+                        .contains(barraBusqueda.text.toLowerCase()) ||
+                    movimiento['fechagasto']!
+                        .toLowerCase()
+                        .contains(barraBusqueda.text.toLowerCase()))
+                .toList();
+            return Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: TextField(
+                    controller: barraBusqueda,
+                    decoration: InputDecoration(
+                      labelText: 'Buscar',
+                      prefixIcon: const Icon(Icons.search),
+                      border: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                    onChanged: (value) {
+                      setState(() {});
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: _listaMovientos(movimientosFiltrados),
+                ),
+              ],
+            );
           } else if (state is ErrorGetAllMovimientos) {
             return Center(child: Text('Error: ${state.mensajeError}'));
           } else {
