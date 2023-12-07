@@ -29,7 +29,7 @@ class DBCarro {
               'CREATE TABLE IF NOT EXISTS movimientos (idmovimiento INTEGER PRIMARY KEY AUTOINCREMENT, nombremovimiento TEXT NOT NULL, idcarro INT NOT NULL, idcategoria INT NOT NULL, gastototal INT NOT NULL, fechagasto TEXT(30) NOT NULL)');
 
           await db.execute(
-              "INSERT INTO categorias (nombrecategoria) VALUES ('Gasolina'),('Mantenimiento'),('Limpieza')");
+              "INSERT INTO categorias (nombrecategoria) VALUES ('Gasolina'),('Servicios'),('Lavado')");
         },
       ),
     );
@@ -90,7 +90,7 @@ class DBCarro {
         [id]);
   }
 
-//DB PARA GASTOS
+//BD PARA GASTOS
   Future<List<Map<String, dynamic>>> getMovimientos() async {
     var resultadoConsulta = await db.rawQuery(
         'SELECT * FROM movimientos INNER JOIN carros ON movimientos.idcarro = carros.idcarro INNER JOIN categorias ON movimientos.idcategoria = categorias.idcategoria;');
