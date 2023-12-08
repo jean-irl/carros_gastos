@@ -12,8 +12,10 @@ class CategoriaSeleccionadoEstado extends CategoriaEstado {
 
 class GetAllCategorias extends CategoriaEstado {
   final List<Map<String, dynamic>> categorias;
+  final List<Map<String, dynamic>> categoriasarchivadas;
 
-  GetAllCategorias({required this.categorias});
+  GetAllCategorias(
+      {required this.categorias, required this.categoriasarchivadas});
 }
 
 class CategoriaInsertada extends CategoriaEstado {}

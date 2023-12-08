@@ -6,6 +6,10 @@ import 'package:carros_gastos/database_helper/carros_database_helper.dart';
 
 class CategoriaBloc extends Bloc<CategoriaEvento, CategoriaEstado> {
   final DBCarro dbCarro;
+  late List<Map<String, dynamic>> allCategorias =
+      []; // Lista de todas las categorias
+  late List<Map<String, dynamic>> categoriasArchivadas =
+      []; // Lista de categorias archivadas
   CategoriaBloc(this.dbCarro) : super(EstadoCategoriaInicial()) {
     on<CategoriaInicializada>((event, emit) {
       emit(EstadoCategoriaInicial());
@@ -18,8 +22,13 @@ class CategoriaBloc extends Bloc<CategoriaEvento, CategoriaEstado> {
 
     on<GetCategorias>((event, emit) async {
       try {
-        final categorias = await dbCarro.getCategorias();
-        emit(GetAllCategorias(categorias: categorias));
+        final allCategorias = await dbCarro.getCategorias();
+        final catetegoriasArchivadas = allCategorias
+            .where((categoria) => categoria['archivado'] == 1)
+            .toList();
+        emit(GetAllCategorias(
+            categorias: allCategorias,
+            categoriasarchivadas: catetegoriasArchivadas));
       } catch (e) {
         emit(ErrorGetAllCategorias(
             mensajeError: 'Error al cargar todas las categorias: $e'));

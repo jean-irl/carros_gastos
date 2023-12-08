@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -48,10 +50,9 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(),
-      home: const Scaffold(body: MainApp()),
+      home: Scaffold(body: MainApp()),
     );
   }
 }
@@ -90,8 +91,12 @@ class _MainAppState extends State<MainApp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Center(child: Text('Control de Gastos Vehicular')),
-        backgroundColor: const Color.fromARGB(255, 136, 45, 45),
+        title: const Center(
+            child: Text(
+          'Control de Gastos Vehicular',
+          style: TextStyle(color: Color.fromRGBO(250, 240, 228, 1)),
+        )),
+        backgroundColor: const Color.fromRGBO(28, 29, 50, 1),
         actions: const [],
       ),
       body: BlocBuilder<CarroBloc, CarroEstado>(
@@ -116,9 +121,9 @@ class _MainAppState extends State<MainApp> {
         ],
         currentIndex: _indiceSeleccionado,
         onTap: _onTabTapped,
-        backgroundColor: const Color.fromARGB(255, 136, 45, 45),
-        selectedItemColor: Colors.white,
-        unselectedItemColor: Colors.grey,
+        backgroundColor: const Color.fromRGBO(28, 29, 50, 1),
+        selectedItemColor: const Color.fromRGBO(243, 210, 50, 1),
+        unselectedItemColor: const Color.fromRGBO(250, 240, 228, 1),
       ),
     );
   }
@@ -160,15 +165,18 @@ class _ListaCarrosState extends State<ListaCarros> {
                       labelText: 'Buscar',
                       prefixIcon: const Icon(Icons.search),
                       border: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
+                        borderSide: const BorderSide(
+                            color: Color.fromRGBO(250, 240, 228, 1)),
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
+                        borderSide: const BorderSide(
+                            color: Color.fromRGBO(250, 240, 228, 1)),
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
+                        borderSide: const BorderSide(
+                            color: Color.fromRGBO(250, 240, 228, 1)),
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
@@ -193,8 +201,11 @@ class _ListaCarrosState extends State<ListaCarros> {
         onPressed: () {
           _mostrarModal(context, 'Nuevo Carro');
         },
-        backgroundColor: Colors.blue,
-        child: const Icon(Icons.add),
+        backgroundColor: const Color.fromRGBO(28, 29, 50, 1),
+        child: const Icon(
+          Icons.add,
+          color: Color.fromRGBO(250, 240, 228, 1),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
@@ -214,10 +225,13 @@ class _ListaCarrosState extends State<ListaCarros> {
             elevation: 4,
             margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             child: ListTile(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(3.0)),
+              textColor: const Color.fromRGBO(250, 240, 228, 1),
               title: Text(carro['apodo'] ?? 'No Apodo'),
               subtitle: Text('Gasto Total: $totalGasto'),
               tileColor: archivado == 1
-                  ? const Color.fromARGB(0, 0, 0, 0)
+                  ? const Color.fromRGBO(28, 29, 50, 1)
                   : Colors.red,
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -229,9 +243,9 @@ class _ListaCarrosState extends State<ListaCarros> {
                           : null;
                     },
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: const Color.fromARGB(
-                          255, 57, 57, 58), // Color del ícono
+                      foregroundColor: const Color.fromRGBO(28, 29, 50, 1),
+                      backgroundColor: const Color.fromRGBO(
+                          250, 240, 228, 1), // Color del ícono
                     ),
                     child: const Icon(Icons.edit),
                   ),
@@ -269,10 +283,10 @@ class _ListaCarrosState extends State<ListaCarros> {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: const Color.fromARGB(
-                          255, 57, 57, 58), // Color del ícono
-                    ),
+                        foregroundColor: const Color.fromRGBO(28, 29, 50, 1),
+                        backgroundColor: const Color.fromRGBO(
+                            250, 240, 228, 1) // Color del ícono
+                        ),
                     child: const Icon(Icons.archive),
                   ),
                 ],
@@ -316,8 +330,11 @@ class _AgregarCarroState extends State<AgregarCarro> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Nuevo Carro'),
-            backgroundColor: Colors.purple,
+            title: const Text(
+              'Nuevo Carro',
+              style: TextStyle(color: Color.fromRGBO(250, 240, 228, 1)),
+            ),
+            backgroundColor: const Color.fromRGBO(28, 29, 50, 1),
           ),
           body: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -349,9 +366,13 @@ class _AgregarCarroState extends State<AgregarCarro> {
                         Navigator.of(context).pop();
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.purple,
+                        backgroundColor: const Color.fromRGBO(28, 29, 50, 1),
                       ),
-                      child: const Text('Insertar Carro'),
+                      child: const Text(
+                        'Insertar Carro',
+                        style:
+                            TextStyle(color: Color.fromRGBO(250, 240, 228, 1)),
+                      ),
                     ),
                   ],
                 ),
@@ -413,8 +434,12 @@ class _EditarCarroState extends State<EditarCarro> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Editar Carro'),
-        backgroundColor: Colors.blueAccent, // Color para identificar la edición
+        title: const Text(
+          'Editar Carro',
+          style: TextStyle(color: Color.fromRGBO(250, 240, 228, 1)),
+        ),
+        backgroundColor: const Color.fromRGBO(
+            28, 29, 50, 1), // Color para identificar la edición
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -443,9 +468,12 @@ class _EditarCarroState extends State<EditarCarro> {
                   _actualizarCarro(context);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
+                  backgroundColor: const Color.fromRGBO(28, 29, 50, 1),
                 ),
-                child: const Text('Actualizar Carro'),
+                child: const Text(
+                  'Actualizar Carro',
+                  style: TextStyle(color: Color.fromRGBO(250, 240, 228, 1)),
+                ),
               ),
             ],
           ),
@@ -500,15 +528,18 @@ class _ListaCategoriasState extends State<ListaCategorias> {
                       labelText: 'Buscar',
                       prefixIcon: const Icon(Icons.search),
                       border: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
+                        borderSide: const BorderSide(
+                            color: Color.fromRGBO(250, 240, 228, 1)),
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
+                        borderSide: const BorderSide(
+                            color: Color.fromRGBO(250, 240, 228, 1)),
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(color: Colors.white),
+                        borderSide: const BorderSide(
+                            color: Color.fromRGBO(250, 240, 228, 1)),
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                     ),
@@ -533,8 +564,11 @@ class _ListaCategoriasState extends State<ListaCategorias> {
         onPressed: () {
           _mostrarModal(context, 'Nueva Categoria');
         },
-        backgroundColor: Colors.blue,
-        child: const Icon(Icons.add),
+        backgroundColor: const Color.fromRGBO(28, 29, 50, 1),
+        child: const Icon(
+          Icons.add,
+          color: Color.fromRGBO(250, 240, 228, 1),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
@@ -553,10 +587,13 @@ class _ListaCategoriasState extends State<ListaCategorias> {
             elevation: 4,
             margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             child: ListTile(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(3.0)),
               title: Text(categoria['nombrecategoria'] ?? 'No hay nombre'),
               subtitle: Text('Gasto Total: $totalGasto'),
+              textColor: const Color.fromRGBO(250, 240, 228, 1),
               tileColor: archivado == 1
-                  ? const Color.fromARGB(0, 0, 0, 0)
+                  ? const Color.fromRGBO(28, 29, 50, 1)
                   : Colors.red,
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -568,9 +605,9 @@ class _ListaCategoriasState extends State<ListaCategorias> {
                           : null;
                     },
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: const Color.fromARGB(
-                          255, 57, 57, 58), // Color del ícono
+                      foregroundColor: const Color.fromRGBO(28, 29, 50, 1),
+                      backgroundColor: const Color.fromRGBO(
+                          250, 240, 228, 1), // Color del ícono
                     ),
                     child: const Icon(Icons.edit),
                   ),
@@ -608,9 +645,9 @@ class _ListaCategoriasState extends State<ListaCategorias> {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: const Color.fromARGB(
-                          255, 57, 57, 58), // Color del ícono
+                      foregroundColor: const Color.fromRGBO(28, 29, 50, 1),
+                      backgroundColor: const Color.fromRGBO(
+                          250, 240, 228, 1), // Color del ícono
                     ),
                     child: const Icon(Icons.archive),
                   ),
@@ -655,8 +692,11 @@ class _AgregarCategoriaState extends State<AgregarCategoria> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Nueva Categoria'),
-            backgroundColor: Colors.purple,
+            title: const Text(
+              'Nueva Categoria',
+              style: TextStyle(color: Color.fromRGBO(250, 240, 228, 1)),
+            ),
+            backgroundColor: const Color.fromRGBO(28, 29, 50, 1),
           ),
           body: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -688,9 +728,13 @@ class _AgregarCategoriaState extends State<AgregarCategoria> {
                         Navigator.of(context).pop();
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.purple,
+                        backgroundColor: const Color.fromRGBO(28, 29, 50, 1),
                       ),
-                      child: const Text('Insertar Categoria'),
+                      child: const Text(
+                        'Insertar Categoria',
+                        style:
+                            TextStyle(color: Color.fromRGBO(250, 240, 228, 1)),
+                      ),
                     ),
                   ],
                 ),
@@ -754,8 +798,12 @@ class _EditarCategoriaState extends State<EditarCategoria> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Editar Categoria'),
-        backgroundColor: Colors.blueAccent, // Color para identificar la edición
+        title: const Text(
+          'Editar Categoria',
+          style: TextStyle(color: Color.fromRGBO(250, 240, 228, 1)),
+        ),
+        backgroundColor: const Color.fromRGBO(
+            28, 29, 50, 1), // Color para identificar la edición
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -784,9 +832,12 @@ class _EditarCategoriaState extends State<EditarCategoria> {
                   _actualizarCategoria(context);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blueAccent,
+                  backgroundColor: const Color.fromRGBO(28, 29, 50, 1),
                 ),
-                child: const Text('Actualizar Categoria'),
+                child: const Text(
+                  'Actualizar Categoria',
+                  style: TextStyle(color: Color.fromRGBO(250, 240, 228, 1)),
+                ),
               ),
             ],
           ),
@@ -884,8 +935,11 @@ class _ListaMovimientosState extends State<ListaMovimientos> {
         onPressed: () {
           _mostrarModal(context, 'Nuevo Movimiento');
         },
-        backgroundColor: Colors.green,
-        child: const Icon(Icons.add),
+        backgroundColor: const Color.fromRGBO(28, 29, 50, 1),
+        child: const Icon(
+          Icons.add,
+          color: Color.fromRGBO(250, 240, 228, 1),
+        ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
@@ -906,14 +960,18 @@ class _ListaMovimientosState extends State<ListaMovimientos> {
             elevation: 4,
             margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
             child: ListTile(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(3.0)),
+              textColor: const Color.fromRGBO(250, 240, 228, 1),
+              tileColor: const Color.fromRGBO(28, 29, 50, 1),
               title: Text(movimiento['nombremovimiento'] ?? 'No hay nombre'),
               subtitle: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Asociado a: $idcarro'),
-                  Text('Asociado a la categoria: $idcategoria'),
-                  Text('Gasto sobre concepto: $gastototal'),
-                  Text('Fecha del gasto: $fechagasto'),
+                  Text('Categoria: $idcategoria'),
+                  Text('Cantidad: $gastototal'),
+                  Text('Fecha: $fechagasto'),
                 ],
               ),
               trailing: Row(
@@ -924,9 +982,9 @@ class _ListaMovimientosState extends State<ListaMovimientos> {
                       _mostrarModalEditarMovimiento(context, movimiento);
                     },
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: const Color.fromARGB(
-                          255, 57, 57, 58), // Color del ícono
+                      foregroundColor: const Color.fromRGBO(28, 29, 50, 1),
+                      backgroundColor: const Color.fromRGBO(
+                          250, 240, 228, 1), // Color del ícono
                     ),
                     child: const Icon(Icons.edit),
                   ),
@@ -961,9 +1019,9 @@ class _ListaMovimientosState extends State<ListaMovimientos> {
                       );
                     },
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: Colors.white,
-                      backgroundColor: const Color.fromARGB(
-                          255, 57, 57, 58), // Color del ícono
+                      foregroundColor: const Color.fromRGBO(28, 29, 50, 1),
+                      backgroundColor: const Color.fromRGBO(
+                          250, 240, 228, 1), // Color del ícono
                     ),
                     child: const Icon(Icons.delete),
                   ),
@@ -1001,14 +1059,15 @@ class AgregarMovimiento extends StatefulWidget {
 class _AgregarMovimientoState extends State<AgregarMovimiento> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController nombreController = TextEditingController();
-  int carroSeleccionado = 1;
-  int categoriaSeleccionada = 1;
+  int carroSeleccionado = 0;
+  int categoriaSeleccionada = 0;
   TextEditingController gastosController = TextEditingController();
   DateTime selectedDate = DateTime.now();
 
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
       initialDate: selectedDate,
       firstDate: DateTime.now()
           .subtract(const Duration(days: 365)), // Restringe un año hacia atrás
@@ -1025,11 +1084,14 @@ class _AgregarMovimientoState extends State<AgregarMovimiento> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Nuevo Gasto'),
-        backgroundColor: Colors.purple,
+        title: const Text(
+          'Nuevo Gasto',
+          style: TextStyle(color: Color.fromRGBO(250, 240, 228, 1)),
+        ),
+        backgroundColor: const Color.fromRGBO(28, 29, 50, 1),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
           child: Form(
             key: _formKey,
@@ -1042,21 +1104,30 @@ class _AgregarMovimientoState extends State<AgregarMovimiento> {
                     BlocBuilder<CarroBloc, CarroEstado>(
                       builder: (context, carroState) {
                         if (carroState is GetAllCarros) {
-                          List<Map<String, dynamic>> carros = carroState.carros;
+                          List<Map<String, dynamic>> carros = carroState
+                              .carrosArchivados; // Usar carrosArchivados en lugar de carros
 
                           return DropdownButton<int>(
                             onChanged: (newValue) {
                               setState(() {
-                                carroSeleccionado = newValue!;
+                                if (newValue != null && newValue != 0) {
+                                  carroSeleccionado = newValue;
+                                }
                               });
                             },
-                            value: carroSeleccionado, // Valor seleccionado
-                            items: carros.map((carro) {
-                              return DropdownMenuItem<int>(
-                                value: carro['idcarro'],
-                                child: Text(carro['apodo'].toString()),
-                              );
-                            }).toList(),
+                            value: carroSeleccionado,
+                            items: [
+                              const DropdownMenuItem<int>(
+                                value: 0,
+                                child: Text('Carro'),
+                              ),
+                              ...carros.map((carro) {
+                                return DropdownMenuItem<int>(
+                                  value: carro['idcarro'],
+                                  child: Text(carro['apodo'].toString()),
+                                );
+                              }).toList(),
+                            ],
                           );
                         } else {
                           return const CircularProgressIndicator();
@@ -1067,7 +1138,7 @@ class _AgregarMovimientoState extends State<AgregarMovimiento> {
                       builder: (context, categoriaState) {
                         if (categoriaState is GetAllCategorias) {
                           List<Map<String, dynamic>> categorias =
-                              categoriaState.categorias;
+                              categoriaState.categoriasarchivadas;
 
                           return DropdownButton<int>(
                             value: categoriaSeleccionada,
@@ -1076,13 +1147,20 @@ class _AgregarMovimientoState extends State<AgregarMovimiento> {
                                 categoriaSeleccionada = newValue!;
                               });
                             },
-                            items: categorias.map((categoria) {
-                              return DropdownMenuItem<int>(
-                                value: categoria['idcategoria'],
-                                child: Text(
-                                    categoria['nombrecategoria'].toString()),
-                              );
-                            }).toList(),
+                            items: [
+                              const DropdownMenuItem<int>(
+                                value: 0,
+                                child: Text('Categoria'),
+                              ),
+                              ...categorias.map((categoria) {
+                                return DropdownMenuItem<int>(
+                                  value: categoria['idcategoria'],
+                                  child: Text(
+                                    categoria['nombrecategoria'].toString(),
+                                  ),
+                                );
+                              }).toList(),
+                            ],
                           );
                         } else {
                           return const CircularProgressIndicator();
@@ -1129,20 +1207,37 @@ class _AgregarMovimientoState extends State<AgregarMovimiento> {
                 ),
                 const SizedBox(height: 10.0),
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromRGBO(28, 29, 50, 1)),
                   onPressed: () => _selectDate(context),
                   child: Text(
-                      'Seleccionar fecha: ${DateFormat('yyyy-MM-dd').format(selectedDate)}'),
+                    'Seleccionar fecha: ${DateFormat('yyyy-MM-dd').format(selectedDate)}',
+                    style: const TextStyle(
+                        color: Color.fromRGBO(250, 240, 228, 1)),
+                  ),
                 ),
                 const SizedBox(height: 10.0),
                 ElevatedButton(
-                  onPressed: () {
-                    _insertarMovimiento(context);
-                    Navigator.of(context).pop();
-                  },
+                  onPressed: carroSeleccionado != 0 &&
+                          categoriaSeleccionada != 0
+                      ? () {
+                          _insertarMovimiento(context);
+                          Navigator.of(context).pop();
+                        }
+                      : null, // Deshabilita el botón si carroSeleccionado o categoriaSeleccionada son 0
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.purple,
+                    backgroundColor: const Color.fromRGBO(28, 29, 50, 1),
                   ),
-                  child: const Text('Insertar Gasto'),
+                  child: Text(
+                    'Insertar Gasto',
+                    // Cambia el estilo del texto si carroSeleccionado o categoriaSeleccionada son 0
+                    style: TextStyle(
+                      color:
+                          (carroSeleccionado != 0 && categoriaSeleccionada != 0)
+                              ? const Color.fromRGBO(250, 240, 228, 1)
+                              : Colors.grey,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -1206,6 +1301,7 @@ class _EditarMovimientoState extends State<EditarMovimiento> {
   Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
+      initialEntryMode: DatePickerEntryMode.calendarOnly,
       initialDate: selectedFecha,
       firstDate: DateTime.now().subtract(const Duration(days: 365)),
       lastDate: DateTime.now(),
@@ -1227,16 +1323,15 @@ class _EditarMovimientoState extends State<EditarMovimiento> {
     String fechaDB = widget.movimiento['fechagasto'];
     selectedFecha = DateTime.parse(
         fechaDB); // Asigna la fecha de la base de datos a selectedDate
-    print(
-        selectedFecha); // Añadir este print para verificar el valor de selectedDate
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Actualizar Gasto'),
-        backgroundColor: Colors.purple,
+        title: const Text('Editar Gasto',
+            style: TextStyle(color: Color.fromRGBO(250, 240, 228, 1))),
+        backgroundColor: const Color.fromRGBO(28, 29, 50, 1),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -1338,9 +1433,14 @@ class _EditarMovimientoState extends State<EditarMovimiento> {
               ),
               const SizedBox(height: 10.0),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromRGBO(28, 29, 50, 1)),
                 onPressed: () => _selectDate(context),
                 child: Text(
-                    'Seleccionar fecha: ${DateFormat('yyyy-MM-dd').format(selectedFecha)}'),
+                  'Seleccionar fecha: ${DateFormat('yyyy-MM-dd').format(selectedFecha)}',
+                  style:
+                      const TextStyle(color: Color.fromRGBO(250, 240, 228, 1)),
+                ),
               ),
               const SizedBox(height: 10.0),
               ElevatedButton(
@@ -1348,9 +1448,12 @@ class _EditarMovimientoState extends State<EditarMovimiento> {
                   _actualizarMovimiento(context);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple,
+                  backgroundColor: const Color.fromRGBO(28, 29, 50, 1),
                 ),
-                child: const Text('Actualizar Gasto'),
+                child: const Text(
+                  'Actualizar Gasto',
+                  style: TextStyle(color: Color.fromRGBO(250, 240, 228, 1)),
+                ),
               ),
             ],
           ),

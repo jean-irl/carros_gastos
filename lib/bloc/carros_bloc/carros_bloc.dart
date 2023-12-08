@@ -7,11 +7,16 @@ import 'package:carros_gastos/bloc/carros_bloc/carros_bloc_state.dart';
 
 class CarroBloc extends Bloc<CarroEvento, CarroEstado> {
   final DBCarro dbCarro;
+  late List<Map<String, dynamic>> allCarros = []; // Lista de todos los carros
+  late List<Map<String, dynamic>> carrosArchivados =
+      []; // Lista de carros archivados
+
   CarroBloc(this.dbCarro) : super(EstadoInicial()) {
     on<Inicializado>((event, emit) {
       emit(EstadoInicial());
     });
 
+//Carros
     on<CarroSeleccionado>((event, emit) {
       final int idSeleccionado = event.indiceSeleccionado;
       emit(CarroSeleccionadoEstado(idSeleccionado: idSeleccionado));
@@ -19,8 +24,11 @@ class CarroBloc extends Bloc<CarroEvento, CarroEstado> {
 
     on<GetCarros>((event, emit) async {
       try {
-        final carros = await dbCarro.getCarros();
-        emit(GetAllCarros(carros: carros));
+        final allCarros = await dbCarro.getCarros();
+        final carrosArchivados =
+            allCarros.where((carro) => carro['archivado'] == 1).toList();
+        emit(GetAllCarros(
+            carros: allCarros, carrosArchivados: carrosArchivados));
       } catch (e) {
         emit(ErrorGetAllCarros(
             mensajeError: 'Error al cargar todos los carros: $e'));

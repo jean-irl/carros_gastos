@@ -29,7 +29,7 @@ class DBCarro {
               'CREATE TABLE IF NOT EXISTS movimientos (idmovimiento INTEGER PRIMARY KEY AUTOINCREMENT, nombremovimiento TEXT NOT NULL, idcarro INT NOT NULL, idcategoria INT NOT NULL, gastototal INT NOT NULL, fechagasto TEXT(30) NOT NULL)');
 
           await db.execute(
-              "INSERT INTO categorias (nombrecategoria) VALUES ('Gasolina'),('Servicios'),('Lavado')");
+              "INSERT INTO categorias (nombrecategoria) VALUES ('Gasolina'),('Servicio Tecnico'),('Lavado')");
         },
       ),
     );
@@ -90,7 +90,7 @@ class DBCarro {
         [id]);
   }
 
-//BD PARA GASTOS
+//DB PARA GASTOS
   Future<List<Map<String, dynamic>>> getMovimientos() async {
     var resultadoConsulta = await db.rawQuery(
         'SELECT * FROM movimientos INNER JOIN carros ON movimientos.idcarro = carros.idcarro INNER JOIN categorias ON movimientos.idcategoria = categorias.idcategoria;');
@@ -109,9 +109,9 @@ class DBCarro {
         'INSERT INTO movimientos (nombremovimiento, idcarro, idcategoria, gastototal, fechagasto) VALUES (?, ?, ?, ?, ?)',
         [nombremovimiento, idcarro, idcategoria, gastototal, fechagasto],
       );
-      print('Movimiento insertado correctamente');
+      //print('Movimiento insertado correctamente');
     } catch (e) {
-      print('Error al insertar el movimiento: $e');
+      //print('Error al insertar el movimiento: $e');
       // Maneja el error de inserción aquí si es necesario
     }
   }
